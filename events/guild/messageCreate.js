@@ -27,6 +27,11 @@ module.exports = async (client, message) => {
 		if (prefixRegex.test(message.content)) {
 			//now define the right prefix either ping or not ping
 			const [, matchedPrefix] = message.content.match(prefixRegex);
+			// If the used prefix is "[" we check if it is not juste a use of "[some text]"
+			if (matchedPrefix == prefix) {
+				const closingBrace = new RegExp(/^(?:\[[^\[\]]*\])/);
+				if (closingBrace.test(message.content)) return;
+			}
 			//create the arguments with slicing of of the right prefix length
 			const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
 			//creating the cmd argument by shifting the args by 1
