@@ -16,7 +16,7 @@ module.exports = {
       console.log(String(e.stack).bgRed)
     }
   },
-  //changeging the duration from ms to a date
+  //changing the duration from ms to a date
   duration: function(ms) {
       const sec = Math.floor((ms / 1000) % 60).toString();
       const min = Math.floor((ms / (60 * 1000)) % 60).toString();
@@ -55,7 +55,7 @@ module.exports = {
     try{
       return Math.floor(Math.random() * Math.floor(max));
     }catch (e){
-      console.log(String(e.stack).bgRed)
+      console.error(String(e.stack).bgRed)
     }
   },
   //random number between y and x
@@ -63,7 +63,7 @@ module.exports = {
     try{
       return Math.floor(Math.random() * Math.floor((max - min) + min));
     }catch (e){
-      console.log(String(e.stack).bgRed)
+      console.error(String(e.stack).bgRed)
     }
   },
   //function for creating a bar
@@ -73,7 +73,7 @@ module.exports = {
       if (!String(bar).includes("🔶")) return `**[🔶${line.repeat(size - 1)}]**\n**00:00:00 / 00:00:00**`;
       return `**[${bar[0]}]**\n**${new Date(currenttime).toISOString().substr(11, 8)+" / "+(maxtime==0?" ◉ LIVE":new Date(maxtime).toISOString().substr(11, 8))}**`;
     }catch (e) {
-      console.log(String(e.stack).bgRed)
+      console.error(String(e.stack).bgRed)
     }
   },
   format: function(millis) {
@@ -115,6 +115,9 @@ module.exports = {
   },
   isNinluc: function (id) {
     return id == "417731861033385985";
+  },
+  isLama: function (guildId) {
+    return guildId == "1114242845692403773";
   },
   /**
    * Gives an random element from the array given.

@@ -13,9 +13,7 @@ module.exports = {
       // If it has mentions → return nothing
       if (message.mentions.members.size) {return;}
 
-      
-
-      var answers = ["Bonsoir 🌙", `bsr ${message.author}`, "bsr Figue..."];
+      var answers = ["Bonsoir 🌙", `bsr ${message.author}`];
 
       return message.channel.send({ content : choose(answers)})
 
