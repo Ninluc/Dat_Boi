@@ -10,7 +10,7 @@ const {
 
 module.exports = {
 	keyword: "gambling",
-	regex: /^.{0,5}(gambling|gamble).{0,17}$/i,
+	regex: /^.*(gambling|gamble).{0,17}$/i,
 	cooldown: 3,
 	random: 80,
 	run: async (client, message, user) => {

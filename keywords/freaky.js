@@ -10,7 +10,7 @@ const {
 
 module.exports = {
 	keyword: "freaky",
-	regex: /^.{0,5}(freak|freaky).{0,17}$/i,
+	regex: /^.*(freak|freaky).{0,17}$/i,
 	cooldown: 3,
 	random: 80,
 	run: async (client, message, user) => {
