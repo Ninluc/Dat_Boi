@@ -71,7 +71,7 @@ module.exports = client => {
 
 
   try{
-	client.user.setActivity(client.user.username, { type: "PLAYING" });
+		client.user.setActivity(client.user.username, { type: "PLAYING" });
   }catch (e) {
 	  console.log(String(e.stack).red);
   }
@@ -90,13 +90,14 @@ module.exports = client => {
 
 
   const statusList = [
-	{text: "s'upgrade 🔧"},
-	{text: "t'emmerder"},
-	{text: "[help"},
-	{text: "[help"},
-	{text: "[help"},
-	{text: "Like ur cut G"},
-	{text: "une dernière fois Daft Punk", type: "LISTENING"}
+		{text: "s'upgrade 🔧"},
+		{text: "t'emmerder"},
+		{text: "[help"},
+		{text: "[help"},
+		{text: "[help"},
+		{text: "Like ur cut G"},
+		{text: "une dernière fois Daft Punk", type: "LISTENING"}
+		{text: "Doki doki blue skies"}
   ]
   var status, lastStatus = ""
 
