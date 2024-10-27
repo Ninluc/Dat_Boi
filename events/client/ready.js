@@ -96,8 +96,8 @@ module.exports = client => {
 		{text: "[help"},
 		{text: "[help"},
 		{text: "Like ur cut G"},
-		{text: "une dernière fois Daft Punk", type: "LISTENING"}
-		{text: "Doki doki blue skies"}
+		{text: "une dernière fois Daft Punk", type: "LISTENING"},
+		{text: "Doki doki blue skies"},
   ]
   var status, lastStatus = ""
 

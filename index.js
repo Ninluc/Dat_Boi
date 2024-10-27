@@ -28,7 +28,7 @@ client.keywords = new Discord.Collection(); // all the keywords the bot will rea
 client.dmCommands = new Discord.Collection(); // all the private commands
 
 //Loading files, with the client variable like Command Handler, Event Handler, ...
-["command", "dmCommand", "events", "keywords"].forEach(handler => {
+["command", "dmCommand", "events", "keywords", "timedMessages"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
 
