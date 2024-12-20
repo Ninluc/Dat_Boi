@@ -4,8 +4,7 @@
   "description": "Dat boi, the annoying discord bot",
   "main": "index.js",
   "scripts": {
-    "start": "node --trace-warnings index.js",
-    "stop": "sh ~/scripts/sshKill.sh"
+    "start": "node --trace-warnings --env-file=.env index.js"
   },
   "author": "Tomato#6966 (author of this template), Ninluc",
   "license": "ISC",

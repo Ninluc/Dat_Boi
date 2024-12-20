@@ -4,9 +4,7 @@ package-lock.json
 
 # IDE files
 .vscode/
+.idea/
 
-# local env files
-botconfig/config.json
-
-# Large files
-sounds/
+# Environment variables
+.env

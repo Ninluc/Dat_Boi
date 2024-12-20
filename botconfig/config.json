@@ -1,5 +1,4 @@
 {
-  "token": "YOUR_BOT_TOKEN",
   "prefix": "[",
   "defaultCommandCooldown" : 1,
   "statusChangeInterval": 8
