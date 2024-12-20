@@ -1,7 +1,5 @@
-const { MessageEmbed, Message } = require("discord.js");
-const config = require("../botconfig/config.json");
+const { MessageEmbed } = require("discord.js");
 const ee = require("../botconfig/embed.json");
-const { sendNinluc } = require("../handlers/functions");
 
 const RAPPEL_CHANNEL_ID = "1296051297262370866";
 

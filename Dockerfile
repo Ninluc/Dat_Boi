@@ -31,4 +31,4 @@ USER node
 COPY . .
 
 # Run the application.
-CMD echo test
+CMD node --trace-warnings index.js

@@ -1,5 +1,4 @@
 const { MessageEmbed } = require("discord.js");
-const config = require("../botconfig/config.json");
 const ee = require("../botconfig/embed.json");
 const { choose, isNinluc } = require("../handlers/functions");
 
