@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Add secret file
-      run: echo "${{ secrets.BONCONFIG_CONFIG_JSON }}" > botconfig/config.json
+      run: touch botconfig/config.json \
+        echo "${{ secrets.BONCONFIG_CONFIG_JSON }}" > botconfig/config.json
     - name: Send webhook to portainer
       run: "curl -X POST -H 'Content-Type: application/json' -d '' http://172.23.0.1:20000/api/stacks/webhooks/6dbf44ed-eab0-4d52-a633-309d21ffd8c1"
