@@ -31,4 +31,4 @@ USER node
 COPY . .
 
 # Run the application.
-CMD npm start
+CMD node --trace-warnings index.js
