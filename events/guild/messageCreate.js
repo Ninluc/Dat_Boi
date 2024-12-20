@@ -160,7 +160,7 @@ module.exports = async (client, message) => {
 						"SPEAK"
 						// "DEAFEN_MEMBERS",
 					];
-					if (!message.guild.me.permissions.has(required_perms)) {
+					if (!message.guild.members.me.permissions.has(required_perms)) {
 						try {
 							message.react("❌");
 						} catch {}

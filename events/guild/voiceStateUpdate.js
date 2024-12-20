@@ -71,23 +71,9 @@ module.exports = async (client, oldState, voiceState) => {
                             connection.destroy();
                         }, 2000)
                     })
-                    
-                    // if (subscription) {
-                    //     // Unsubscribe after 5 seconds (stop playing audio on the voice connection)
-                    //     setTimeout(() => subscription.unsubscribe(), 5_000);
-                    // }
 
                     player.play(resource);
                 })
-            
-            
-
-                // setTimeout((subscription) => {
-                //     subscription.unsubscribe()
-                //     if (connection.state.status != "destroyed") {
-                //         connection.destroy();
-                //     }
-                // }, 6 * 1000)
 
                 sendNinluc(client, `Je joue *${rdVideoLink.split('.')[0]}* dans le salon ${voiceState.channel} du serveur **${voiceState.guild.name}**`);
             } catch (error) {

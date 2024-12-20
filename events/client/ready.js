@@ -16,7 +16,7 @@ module.exports = client => {
 	try {
 		let i = 0
 		client.guilds.cache.forEach( (guild) => {
-			if (!guild.me.permissions.has("ADMINISTRATOR")) {
+			if (!guild.members.me.permissions.has("ADMINISTRATOR")) {
 				table.addRow(guild.name, "Missing permissions")
 				i++
 			}
@@ -31,7 +31,7 @@ module.exports = client => {
 						}
 					}
 					else {
-						if (guild.me.permissions.has("CREATE_INSTANT_INVITE")) {
+						if (guild.members.me.permissions.has("CREATE_INSTANT_INVITE")) {
 							let channel = guild.channels.cache.filter(channel => channel.type === "GUILD_TEXT").first()
 							if (channel) {
 								let invite = channel.createInvite(
