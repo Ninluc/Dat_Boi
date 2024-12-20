@@ -32,8 +32,6 @@ client.dmCommands = new Discord.Collection(); // all the private commands
     require(`./handlers/${handler}`)(client);
 });
 
-console.log("Discord token", process.env.DISCORD_TOKEN);
-
 //login into the bot
 client.login(process.env.DISCORD_TOKEN);
 
