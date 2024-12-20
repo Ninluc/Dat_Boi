@@ -6,4 +6,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Send webhook to portainer
-      run: "curl -X POST -H 'Content-Type: application/json' -d '' http://172.23.0.1:20000/api/stacks/webhooks/6dbf44ed-eab0-4d52-a633-309d21ffd8c1"
+      run: "curl -X POST -H 'Content-Type: application/json' -d '' http://172.23.0.1:20000/api/stacks/webhooks/0012fba5-2fc7-40e7-92d8-c3d14c7deae4"
