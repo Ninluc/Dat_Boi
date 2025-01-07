@@ -10,6 +10,10 @@ ARG NODE_VERSION=18.4.0
 
 FROM node:${NODE_VERSION}-alpine
 
+# Set the timezone
+RUN apk add --no-cache tzdata
+ENV TZ=Europe/Brussels
+
 # Use production node environment by default.
 ENV NODE_ENV production
 
