@@ -17,7 +17,7 @@ const { reset } = require("colors");
 const { resourceLimits } = require("node:worker_threads");
 const { strict } = require("node:assert");
 const { connect } = require("node:http2");
-const { sendNinluc } = require("../../handlers/functions");
+const { getRandomInt, sendNinluc } = require("../../handlers/functions");
 
 // const { generateDependencyReport } = require('@discordjs/voice');
 // console.log(generateDependencyReport().blue);
