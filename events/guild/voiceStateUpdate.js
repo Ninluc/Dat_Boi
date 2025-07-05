@@ -1,7 +1,4 @@
 const fs = require("fs");
-const config = require("../../botconfig/config.json"); //loading config file with token and prefix, and settings
-const ee = require("../../botconfig/embed.json"); //Loading all embed settings like color footertext and icon ...
-const { createReadStream } = require('node:fs');
 const {
 	joinVoiceChannel,
 	createAudioPlayer,
@@ -13,10 +10,6 @@ const {
 } = require("@discordjs/voice");
 const ffmpeg = require('fluent-ffmpeg');
 const prism = require("prism-media");
-const { reset } = require("colors");
-const { resourceLimits } = require("node:worker_threads");
-const { strict } = require("node:assert");
-const { connect } = require("node:http2");
 const { getRandomInt, sendNinluc } = require("../../handlers/functions");
 
 // const { generateDependencyReport } = require('@discordjs/voice');
