@@ -219,7 +219,7 @@ module.exports = async (client, oldState, voiceState) => {
         let llmAnswer = await getLLMAnswer(transcription, userId);
         console.log(`> LLM Answer: ${llmAnswer.reply} ${llmAnswer.end_conversation ? "(end conversation)" : ""}`);
         // Fin de la conversation
-        shouldStop = llmAnswer.end_conversation ?? llmChat.length >= CHAT_MAX_LENGTH ?? llmAnswer.reply.toLowerCase().contains("à plus");
+        shouldStop = llmAnswer.end_conversation ?? llmChat.length >= CHAT_MAX_LENGTH ?? llmAnswer.reply.toLowerCase().includes("à plus");
         if (!llmAnswer || llmAnswer.length < 1) {
             console.error(`X LLM Answer failed or is empty!`, "error", 1);
             handleRecording(connection, channel);
@@ -281,7 +281,7 @@ module.exports = async (client, oldState, voiceState) => {
                     const response = JSON.parse(stdout);
 
                     response.text = response.text.replace(/Sous-titres réalisés par la communauté d'Amara.org/g, "");
-                    if (response.text.toLowerCase().contains("je vous remercie d'avoir regardé cette vidéo")) {
+                    if (response.text.toLowerCase().includes("je vous remercie d'avoir regardé cette vidéo")) {
                         return ""; // Output is trash, ignore it
                     }
 
