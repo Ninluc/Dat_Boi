@@ -115,6 +115,13 @@ module.exports = async (client, oldState, voiceState) => {
 
             oldNetworking?.off('stateChange', networkStateChangeHandler);
             newNetworking?.on('stateChange', networkStateChangeHandler);
+
+            // If alone in channel, quit
+            if (voiceState.channel.members.filter(m => !m.user.bot && m.id !== client.user.id).size < 1) {
+                connection.destroy();
+                shouldStop = true;
+                return;
+            }
         });
 
         player = createAudioPlayer({
