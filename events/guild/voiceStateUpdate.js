@@ -281,6 +281,9 @@ module.exports = async (client, oldState, voiceState) => {
                     const response = JSON.parse(stdout);
 
                     response.text = response.text.replace(/Sous-titres réalisés par la communauté d'Amara.org/g, "");
+                    if (response.text.toLowerCase().contains("je vous remercie d'avoir regardé cette vidéo")) {
+                        return ""; // Output is trash, ignore it
+                    }
 
                     resolve(response.text || "");
                 } catch (parseError) {
