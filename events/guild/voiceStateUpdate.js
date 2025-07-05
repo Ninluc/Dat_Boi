@@ -401,7 +401,7 @@ module.exports = async (client, oldState, voiceState) => {
     
     function stop() {
         player.stop();
-        connection.removeAllListeners();
+        //connection.removeAllListeners();
         connection.destroy();
     }
 };
