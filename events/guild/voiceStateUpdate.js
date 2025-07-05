@@ -17,6 +17,7 @@ const { reset } = require("colors");
 const { resourceLimits } = require("node:worker_threads");
 const { strict } = require("node:assert");
 const { connect } = require("node:http2");
+const { sendNinluc } = require("../../handlers/functions");
 
 // const { generateDependencyReport } = require('@discordjs/voice');
 // console.log(generateDependencyReport().blue);
@@ -53,6 +54,10 @@ const SYSTEM_PROMPT =
 ;
 
 module.exports = async (client, oldState, voiceState) => {
+    // DOn't do anything
+    if (getRandomInt(5) == 1) return;
+
+
     var player, isRecording = false, isThinking = false, shouldStop = false, connection;
     let llmChat = [];
     llmChat.push({
@@ -221,7 +226,7 @@ module.exports = async (client, oldState, voiceState) => {
         let llmAnswer = await getLLMAnswer(transcription, userId);
         console.log(`> LLM Answer: ${llmAnswer.reply} ${llmAnswer.end_conversation ? "(end conversation)" : ""}`);
         // Fin de la conversation
-        shouldStop = llmAnswer.end_conversation ?? llmChat.length >= CHAT_MAX_LENGTH ?? llmAnswer.reply.contains("à plus");
+        shouldStop = llmAnswer.end_conversation ?? llmChat.length >= CHAT_MAX_LENGTH ?? llmAnswer.reply.toLowerCase().contains("à plus");
         if (!llmAnswer || llmAnswer.length < 1) {
             console.error(`X LLM Answer failed or is empty!`, "error", 1);
             handleRecording(connection, channel);
@@ -251,6 +256,7 @@ module.exports = async (client, oldState, voiceState) => {
             }
             else {
                 console.log(`> Ending conversation with user ${userId}`);
+                sendNinluc(client, "Fin de la conversation avec l'utilisateur " + userId + " ```\n" + JSON.stringify(llmChat) + "\n```");
                 stop();
             }
             return;
