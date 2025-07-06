@@ -9,5 +9,5 @@ package-lock.json
 # Environment variables
 .env
 
-recordings/*!.gitkeep
+recordings/*
 tts.mp3

@@ -117,9 +117,9 @@ module.exports = async (client, oldState, voiceState) => {
             newNetworking?.on('stateChange', networkStateChangeHandler);
 
             // If alone in channel, quit
-            if (voiceState.channel.members.filter(m => !m.user.bot && m.id !== client.user.id).size < 1) {
-                connection.destroy();
+            if (!voiceState.channel?.members || voiceState.channel.members.filter(m => !m.user.bot && m.id !== client.user.id).size < 1) {
                 shouldStop = true;
+                stop();
                 return;
             }
         });
@@ -160,6 +160,13 @@ module.exports = async (client, oldState, voiceState) => {
     function handleRecording(connection, channel) {
         if (isRecording) return;
         isRecording = true;
+
+        // If alone in channel, quit
+        if (!channel?.members || channel.members.filter(m => !m.user.bot && m.id !== client.user.id).size < 1) {
+            shouldStop = true;
+            stop();
+            return;
+        }
     
         const receiver = connection.receiver;
         channel.members.forEach((member) => {
@@ -219,6 +226,7 @@ module.exports = async (client, oldState, voiceState) => {
     
         if (!transcription || transcription.trim().length < 1) {
             console.error(`X Transcription failed or is empty!`, "error", 1);
+            isThinking = false;
             handleRecording(connection, channel);
             return;
         }
@@ -226,9 +234,10 @@ module.exports = async (client, oldState, voiceState) => {
         let llmAnswer = await getLLMAnswer(transcription, userId);
         console.log(`> LLM Answer: ${llmAnswer.reply} ${llmAnswer.end_conversation ? "(end conversation)" : ""}`);
         // Fin de la conversation
-        shouldStop = llmAnswer.end_conversation ?? llmChat.length >= CHAT_MAX_LENGTH ?? llmAnswer.reply.toLowerCase().includes("à plus");
+        shouldStop = llmAnswer.end_conversation || llmChat.length >= CHAT_MAX_LENGTH || llmAnswer.reply.toLowerCase().includes("à plus");
         if (!llmAnswer || llmAnswer.length < 1) {
             console.error(`X LLM Answer failed or is empty!`, "error", 1);
+            isThinking = false;
             handleRecording(connection, channel);
             return;
         }
@@ -256,7 +265,7 @@ module.exports = async (client, oldState, voiceState) => {
             }
             else {
                 console.log(`> Ending conversation with user ${userId}`);
-                sendNinluc(client, "Fin de la conversation avec l'utilisateur " + userId + " ```\n" + JSON.stringify(llmChat) + "\n```");
+                sendConversationToNinluc(userId);
                 stop();
             }
             return;
@@ -287,6 +296,7 @@ module.exports = async (client, oldState, voiceState) => {
                 try {
                     const response = JSON.parse(stdout);
 
+                    // === FILTER OUTPUT ===
                     response.text = response.text.replace(/Sous-titres réalisés par la communauté d'Amara.org/g, "");
                     if (response.text.toLowerCase().includes("je vous remercie d'avoir regardé cette vidéo")) {
                         return ""; // Output is trash, ignore it
@@ -409,6 +419,21 @@ module.exports = async (client, oldState, voiceState) => {
     function stop() {
         player.stop();
         //connection.removeAllListeners();
-        connection.destroy();
+        try {
+            connection.destroy();
+        } catch (e) {}
+    }
+
+    function sendConversationToNinluc(userId) {
+        sendNinluc(client, "Fin de la conversation avec l'utilisateur " + userId);
+
+        llmChat.forEach((message) => {
+            if (message.role === "user") {
+                sendNinluc(client, `(<@${userId}>) : ${message.content}`);
+            } else if (message.role === "assistant") {
+                sendNinluc(client, `DatBoi : ${message.content}`);
+            }
+            // ignore system message
+        })
     }
 };
