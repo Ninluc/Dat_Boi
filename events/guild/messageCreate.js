@@ -5,7 +5,7 @@
 const config = require("../../botconfig/config.json"); //loading config file with token and prefix, and settings
 const ee = require("../../botconfig/embed.json"); //Loading all embed settings like color footertext and icon ...
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
-const { escapeRegex, sendNinluc, isNinluc } = require("../../handlers/functions"); //Loading all needed functions
+const { escapeRegex, sendNinluc, isNinluc, getRandomInt } = require("../../handlers/functions"); //Loading all needed functions
 //here the event starts
 module.exports = async (client, message) => {
 	try {
@@ -237,6 +237,18 @@ module.exports = async (client, message) => {
 						message.react('👶');
 					}
 				}
+
+				// INFO : For Gauthier
+				if (message.author.id == "276041061556551691") {
+					if (Math.floor(Math.random() * 15) == 1) {
+						if (getRandomInt(2) == 1) {
+							message.react('<:goatier:1553776976479911938>');
+						} else {
+							message.reply('<:goatier:1553776976479911938>');
+						}
+					}
+				}
+
 				// INFO : For Ninluc
 				if (message.author.id == "417731861033385985" && message.guild.id == "805809277980901388") {
 					if (Math.floor(Math.random() * 60) == 0) {
