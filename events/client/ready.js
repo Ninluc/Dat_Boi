@@ -98,6 +98,7 @@ module.exports = client => {
 		{text: "Like ur cut G"},
 		{text: "une dernière fois Daft Punk", type: "LISTENING"},
 		{text: "Doki doki blue skies"},
+		{text: "GTA VI", type: "PLAYING"},
   ]
   var status, lastStatus = ""
 
